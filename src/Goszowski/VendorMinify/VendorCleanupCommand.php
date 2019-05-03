@@ -1,31 +1,20 @@
 <?php
-/**
- * Laravel Vendor Cleanup
- *
- * @author    Barry vd. Heuvel <barryvdh@gmail.com>
- * @copyright 2013 Barry vd. Heuvel / Fruitcake Studio (http://www.fruitcakestudio.nl)
- * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @link      https://github.com/barryvdh/laravel-vendor-cleanup
- */
 
-namespace Barryvdh\VendorCleanup;
+namespace Goszowski\VendorMinify;
 
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Finder\Finder;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
 class VendorCleanupCommand extends Command
 {
-
     /**
-     * The console command name.
+     * The name and signature of the console command.
      *
      * @var string
      */
-    protected $name = 'vendor-cleanup';
+    protected $signature = 'vendor:cleanup {dir=vendor}';
 
     /**
      * The console command description.
@@ -34,18 +23,27 @@ class VendorCleanupCommand extends Command
      */
     protected $description = 'Cleanup vendor directory.';
 
+    /**
+     * Create a new command instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Execute the console command.
      *
-     * @return void
+     * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $vendorDir = realpath($this->argument('dir'));
         $this->info("Cleaning dir: $vendorDir");
 
-        $rules = Config::get('laravel-vendor-cleanup::rules');
+        $rules = Config::get('laravel-vendor-cleanup.rules');
 
         $filesystem = new Filesystem();
 
@@ -57,7 +55,7 @@ class VendorCleanupCommand extends Command
             foreach($patterns as $pattern){
                 try{
                     $finder = new Finder();
-                    $finder->name($pattern)->in( $vendorDir . '/' . $packageDir);
+                    $finder->ignoreDotFiles(false)->name($pattern)->in($vendorDir . '/' . $packageDir);
 
                     // we can't directly iterate over $finder if it lists dirs we're deleting
                     $files = iterator_to_array($finder);
@@ -65,8 +63,10 @@ class VendorCleanupCommand extends Command
                     /** @var \SplFileInfo $file */
                     foreach($files as $file){
                         if($file->isDir()){
+                            $this->info('Removing directory: ' . $file);
                             $filesystem->deleteDirectory($file);
                         }elseif($file->isFile()){
+                            $this->info('Removing file:      ' . $file);
                             $filesystem->delete($file);
                         }
                     }
@@ -76,19 +76,4 @@ class VendorCleanupCommand extends Command
             }
         }
     }
-
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return array(
-            array('dir', InputArgument::OPTIONAL, 'The path to vendor (absolute path)', Config::get('laravel-vendor-cleanup::dir', base_path() . '/vendor')),
-        );
-    }
-
-
 }
