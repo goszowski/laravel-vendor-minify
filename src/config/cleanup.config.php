@@ -103,6 +103,12 @@ return array(
         'tecnick.com/tcpdf' => "{$standard}",
         'snowfire/beautymail' => "{$standard}",
         'atehnix/laravel-stubs' => "{$standard}",
+        'mews/purifier' => "{$standard}",
+        'spatie/laravel-activitylog' => "{$standard}",
+        'torann/geoip' => "{$standard}",
+        'spatie/laravel-medialibrary' => "{$standard}",
+        'owen-it/laravel-auditing' => "{$standard}",
+        'cartalyst/sentry' => "{$standard}",
 
         // Default Laravel installation packages
         'beyondcode/laravel-dump-server' => "{$standard}",
