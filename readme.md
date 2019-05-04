@@ -15,6 +15,7 @@ And You can now minify all php files throught artisan
 
     php artisan vendor:minify
 
+### Thanks [Barry vd. Heuvel](https://github.com/barryvdh) and other [Contributors](https://github.com/goszowski/laravel-vendor-minify/graphs/contributors)
 
 ### License
 
