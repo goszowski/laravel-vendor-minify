@@ -21,5 +21,15 @@ return [
             'build.xml',
             'phive.xml',
         ],
+        'phpoffice/phpspreadsheet' => [
+            'samples',
+            '.github',
+        ],
+        'zendframework/zend-diactoros' => [
+            'mkdocs.yml',
+        ],
+        'league/flysystem' => [
+            'deprecations.md',
+        ],
     ],
 ];
