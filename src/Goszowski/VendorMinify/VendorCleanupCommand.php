@@ -33,6 +33,7 @@ class VendorCleanupCommand extends Command
         'examples',
         'doc',
         'docs',
+        'LICENSE',
         'LICENSE*',
         'CONDUCT*',
         '.gitignore',
@@ -48,6 +49,9 @@ class VendorCleanupCommand extends Command
         'test',
         'tests',
         'Tests',
+        'Dockerfile',
+        'docker-compose.yml',
+        'TODO*',
     ];
 
     /**
@@ -95,7 +99,7 @@ class VendorCleanupCommand extends Command
             $pathDirs = explode('/', $package->getPath());
             $vendorPackage = end($pathDirs) . '/' . $package->getBasename();
 
-            $this->line('<fg=white;bg=black>Searching files for </><fg=red>Red' . $vendorPackage . '</><fg=white;bg=black>...</>');
+            $this->line('<fg=white;bg=black>Searching files for </><fg=red>' . $vendorPackage . '</><fg=white;bg=black>...</>');
 
             $patterns = $this->patterns;
             if(isset($rules[$vendorPackage]))
@@ -103,7 +107,7 @@ class VendorCleanupCommand extends Command
                 $patterns = array_merge($patterns, $rules[$vendorPackage]);
             }
             
-            foreach($this->patterns as $pattern){
+            foreach($patterns as $pattern){
                 try{
                     $finder = new Finder();
                     $finder->ignoreDotFiles(false)->name($pattern)->in($vendorDir . '/' . $vendorPackage);
