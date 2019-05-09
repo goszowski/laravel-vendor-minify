@@ -1,7 +1,7 @@
 [![Latest Stable Version](https://poser.pugx.org/goszowski/laravel-vendor-minify/v/stable)](https://packagist.org/packages/goszowski/laravel-vendor-minify) [![Total Downloads](https://poser.pugx.org/goszowski/laravel-vendor-minify/downloads)](https://packagist.org/packages/goszowski/laravel-vendor-minify) [![License](https://poser.pugx.org/goszowski/laravel-vendor-minify/license)](https://packagist.org/packages/goszowski/laravel-vendor-minify)
 ## Laravel Vendor Cleanup and Minify Commands
 
-### Remove tests & documentation from the vendor dir. Minify all php files in the vendor dir
+### 1) Remove tests, documentation, .gitignore files from the vendor dir. 2) Minify all php files in the vendor dir
 
 Require this package:
 
