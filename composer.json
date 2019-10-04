@@ -11,9 +11,9 @@
     ],
     "require": {
         "php": "^7.1.3",
-        "illuminate/support": "5.x",
-        "illuminate/console": "5.x",
-        "illuminate/filesystem": "5.x",
+        "illuminate/support": "6.x",
+        "illuminate/console": "6.x",
+        "illuminate/filesystem": "6.x",
         "symfony/finder": "^4.2"
     },
     "autoload": {
